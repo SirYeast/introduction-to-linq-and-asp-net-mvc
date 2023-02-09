@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Movie>
+
+@{
+	ViewData["Title"] = "Movies";
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+	<h2 class="text-danger">@ViewBag.ErrorMessage</h2>
+	return;
+}
+
+<h1>Movies</h1>
+
+@if (ViewBag.ShowCount is not null and true)
+{
+	<h2>Found @Model.Count() movie(s)</h2>
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Id)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Title)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Year)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BudgetInMillions)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Genre)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Movie item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Id)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Title)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Year)
+				</td>
+				<td>
+					$@Html.DisplayFor(modelItem => item.BudgetInMillions) Million
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Genre)
+				</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@item.Id">Details</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

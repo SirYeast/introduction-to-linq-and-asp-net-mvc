@@ -1,0 +1,11 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = $"{ViewBag.Genre} Count";
+}
+
+<h1>Found @Model movie(s) with the genre '@ViewBag.Genre'</h1>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
