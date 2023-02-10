@@ -19,6 +19,9 @@ namespace MoviesWebApp.Models
 			}
 		}
 
+		private readonly HashSet<ActorRating> _ratings = new();
+		public IReadOnlySet<ActorRating> Ratings { get { return _ratings; } }
+
 		private readonly HashSet<Role> _roles = new();
 		public IReadOnlySet<Role> Roles { get { return _roles; } }
 
@@ -30,6 +33,11 @@ namespace MoviesWebApp.Models
 		public Actor(string name) : this()
 		{
 			Name = name;
+		}
+
+		public void AddRating(ActorRating rating)
+		{
+			_ratings.Add(rating);
 		}
 
 		public void AddRole(Role role)

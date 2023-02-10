@@ -7,14 +7,7 @@ namespace MoviesWebApp.Data
 		private static int _idCounter = 1;
 
 		public static readonly HashSet<Movie> Movies = new();
-		public static readonly HashSet<Actor> Actors = new()
-		{
-			new Actor("Bob Jones"),
-			new Actor("John Chilling"),
-			new Actor("Jeffrey Jenkins"),
-			new Actor("Lindsie Trincie"),
-			new Actor("Christian Baller")
-		};
+		public static readonly HashSet<Actor> Actors = new();
 		public static readonly HashSet<Role> Roles = new();
 		public static readonly HashSet<User> Users = new();
 		public static readonly HashSet<Rating> Ratings = new();
@@ -72,21 +65,6 @@ namespace MoviesWebApp.Data
 			Users.Add(user2);
 			User user3 = new("Dababy_1");
 			Users.Add(user3);
-
-			Rating rating1 = new(8, movie2, user1);
-			movie2.AddRating(rating1);
-			user1.AddRating(rating1);
-			Ratings.Add(rating1);
-
-			Rating rating2 = new(3, movie4, user3);
-			movie4.AddRating(rating2);
-			user3.AddRating(rating2);
-			Ratings.Add(rating2);
-
-			Rating rating3 = new(7, movie2, user2);
-			movie1.AddRating(rating3);
-			user2.AddRating(rating3);
-			Ratings.Add(rating3);
 		}
 
 		public static int GetIdCount()

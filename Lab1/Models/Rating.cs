@@ -19,18 +19,19 @@ namespace MoviesWebApp.Models
 			}
 		}
 
+		public string Comment { get; set; }
+
 		public User User { get; set; }
-		public Movie Movie { get; set; }
 
 		public Rating()
 		{
 			Id = Context.GetIdCount();
 		}
 
-		public Rating(int value, Movie movie, User user) : this()
+		public Rating(int value, string comment, User user) : this()
 		{
 			Value = value;
-			Movie = movie;
+			Comment = comment;
 			User = user;
 		}
 	}

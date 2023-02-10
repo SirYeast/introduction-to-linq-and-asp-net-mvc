@@ -36,8 +36,8 @@ namespace MoviesWebApp.Models
 
 		public Genre Genre { get; set; }
 
-		private readonly HashSet<Rating> _ratings = new();
-		public IReadOnlySet<Rating> Ratings { get { return _ratings; } }
+		private readonly HashSet<MovieRating> _ratings = new();
+		public IReadOnlySet<MovieRating> Ratings { get { return _ratings; } }
 
 		private readonly HashSet<Role> _roles = new();
 		public IReadOnlySet<Role> Roles { get { return _roles; } }
@@ -55,7 +55,7 @@ namespace MoviesWebApp.Models
 			BudgetInMillions = budget;
 		}
 
-		public void AddRating(Rating rating)
+		public void AddRating(MovieRating rating)
 		{
 			_ratings.Add(rating);
 		}
