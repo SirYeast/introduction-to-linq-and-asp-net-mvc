@@ -1,0 +1,108 @@
+﻿@model Movie
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+	<h4>Movie</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Title)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Title)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Year)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Year)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.BudgetInMillions)
+		</dt>
+		<dd class="col-sm-10">
+			$@Html.DisplayFor(model => model.BudgetInMillions) Million
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Genre)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Genre)
+		</dd>
+		<dt class="col-sm-2">
+			Average Rating
+		</dt>
+		<dd class="col-sm-10">
+			@ViewBag.AverageRating
+		</dd>
+	</dl>
+</div>
+
+<h2>Actors</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Actor
+			</th>
+			<th>
+				Credit
+			</th>
+			<th>
+				Pay
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Role item in Model.Roles)
+		{
+			<tr>
+				<td>
+					<a asp-controller="Actors" asp-action="Details" asp-route-id="@item.Actor.Id">
+						@Html.DisplayFor(modelItem => item.Actor.Name)
+					</a>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Credit)
+				</td>
+				<td>
+					$@Html.DisplayFor(modelItem => item.Pay)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<h3>Ratings</h3>
+
+@if (ViewBag.UserId != null)
+{
+	<h4>Submit your rating</h4>
+	<form asp-action="CreateRating">
+		<input name="id" type="hidden" value="@Model.Id" />
+		<input name="value" type="number" min="1" max="10" placeholder="1-10" />
+		<input name="comment" type="text" placeholder="Enter a comment" />
+		<input name="userId" type="hidden" value="@ViewBag.UserId" />
+		<input type="submit" value="Post" />
+	</form>
+	<hr />
+}
+
+@foreach (MovieRating rating in Model.Ratings)
+{
+	<div>
+		<h3>@rating.User.Username</h3>
+		<h4>Rating: @rating.Value</h4>
+		<p>@rating.Comment</p>
+	</div>
+}
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
