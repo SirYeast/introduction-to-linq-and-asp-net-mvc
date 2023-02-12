@@ -1,0 +1,33 @@
+﻿@model MoviesWebApp.Models.ViewModels.CompareMoviesVM
+
+@{
+	ViewData["Title"] = "Compare Movies";
+}
+
+<h1>Compare Movies</h1>
+
+<form asp-action="CompareMovies">
+	<select asp-for="SelectedMovieId1" asp-items="Model.Movies"></select>
+	<select asp-for="SelectedMovieId2" asp-items="Model.Movies"></select>
+	<input type="submit" value="Submit" />
+</form>
+
+<hr />
+
+@if (Model.SelectedMovie1 != null && Model.SelectedMovie2 != null)
+{
+	<div class="row">
+		<div class="col-6">
+			<h2>Movie 1</h2>
+			<h3>@Model.SelectedMovie1.Title (@Model.SelectedMovie1.Year)</h3>
+			<div>Budget: $@Model.SelectedMovie1.BudgetInMillions Million</div>
+			<div>Genre: @Model.SelectedMovie1.Genre</div>
+		</div>
+		<div class="col-6">
+			<h2>Movie 2</h2>
+			<h3>@Model.SelectedMovie2.Title (@Model.SelectedMovie2.Year)</h3>
+			<div>Budget: $@Model.SelectedMovie2.BudgetInMillions Million</div>
+			<div>Genre: @Model.SelectedMovie2.Genre</div>
+		</div>
+	</div>
+}

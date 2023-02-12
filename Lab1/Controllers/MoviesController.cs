@@ -60,6 +60,40 @@ namespace MoviesWebApp.Controllers
 			return View("Index", Context.Movies.Where(m => m.Year is >= 1990 and < 2000));
 		}
 
+		public IActionResult CompareMovies(int movieId1, int movieId2)
+		{
+			CompareMoviesVM vm = new(Context.Movies, movieId1, movieId2);
+
+			if (movieId1 != 0 && movieId2 != 0)
+			{
+				Movie? movie1 = Context.Movies.FirstOrDefault(m => m.Id == movieId1);
+				Movie? movie2 = Context.Movies.FirstOrDefault(m => m.Id == movieId2);
+
+				if (movie1 != null && movie2 != null)
+				{
+					vm.SelectedMovie1 = movie1;
+					vm.SelectedMovie2 = movie2;
+				}
+			}
+
+			return View(vm);
+		}
+
+		[HttpPost]
+		public IActionResult CompareMovies(CompareMoviesVM vm)
+		{
+			try
+			{
+				Movie movie1 = Context.Movies.First(m => m.Id == vm.SelectedMovieId1);
+				Movie movie2 = Context.Movies.First(m => m.Id == vm.SelectedMovieId2);
+				return RedirectToAction("CompareMovies", new { movieId1 = movie1.Id, movieId2 = movie2.Id });
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+			}
+		}
+
 		[HttpPost]
 		public IActionResult CreateRating(CreateRatingVM vm)
 		{
